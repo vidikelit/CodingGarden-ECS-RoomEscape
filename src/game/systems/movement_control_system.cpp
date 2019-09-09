@@ -16,9 +16,9 @@ void MovementControlSystem::OnUpdateEntity(Entity *entity) const {
   auto tc = entity->Get<TransformComponent>();
 
   if (controls_.IsPressed(pcc->up_button_))
-    tc->pos_.y += mc->speed_;
-  if (controls_.IsPressed(pcc->down_button_))
     tc->pos_.y -= mc->speed_;
+  if (controls_.IsPressed(pcc->down_button_))
+    tc->pos_.y += mc->speed_;
   if (controls_.IsPressed(pcc->left_button_))
     tc->pos_.x -= mc->speed_;
   if (controls_.IsPressed(pcc->right_button_))
