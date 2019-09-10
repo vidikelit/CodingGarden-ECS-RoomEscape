@@ -15,7 +15,7 @@ set(PROJECT_SOURCES_DIR ${PROJECT_SOURCE_DIR}/src)
 file(GLOB_RECURSE HEADERS ${PROJECT_HEADERS_DIR}/*.h)
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCES_DIR}/*.cpp)
 
-add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES} include/game/components/texture_component.h src/game/systems/render_system.cpp include/game/system/render_system.h)
+add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES})
 include_directories(${PROJECT_HEADERS_DIR})
 
 target_link_libraries(${PROJECT_NAME} ${BLT_LIBRARIES})
