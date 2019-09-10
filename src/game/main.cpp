@@ -11,6 +11,8 @@ int main() {
   Context ctx{};
   SceneManager sm(ctx);
 
+  terminal_set("input: filter=[keyboard+];");
+
   sm.Put("game", new GameScene(&ctx, controls));
 
   ctx.scene_ = "game";

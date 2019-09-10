@@ -1,8 +1,10 @@
-#include "game/system/movement_control_system.h"
+#include <BearLibTerminal.h>
+
 #include "game/components/movement_component.h"
 #include "game/components/player_control_component.h"
 #include "game/components/save_step_component.h"
 #include "game/components/transform_component.h"
+#include "game/system/movement_control_system.h"
 #include "lib/ecs/entity.h"
 #include "lib/ecs/entity_manager.h"
 
@@ -17,22 +19,22 @@ void MovementControlSystem::OnUpdateEntity(Entity *entity) const {
   auto pcc = entity->Get<PlayerControlComponent>();
   auto ssc = entity->Get<SaveStepComponent>();
 
-  if (controls_.IsPressed(pcc->up_button_)) {
+  if (controls_.IsPressed(pcc->up_button_ | TK_KEY_RELEASED)) {
     ssc->prev_step_.x = tc->pos_.x;
     ssc->prev_step_.y = tc->pos_.y;
     tc->pos_.y -= mc->speed_;
   }
-  if (controls_.IsPressed(pcc->down_button_)) {
+  if (controls_.IsPressed(pcc->down_button_ | TK_KEY_RELEASED)) {
     ssc->prev_step_.x = tc->pos_.x;
     ssc->prev_step_.y = tc->pos_.y;
     tc->pos_.y += mc->speed_;
   }
-  if (controls_.IsPressed(pcc->left_button_))  {
+  if (controls_.IsPressed(pcc->left_button_ | TK_KEY_RELEASED)) {
     ssc->prev_step_.x = tc->pos_.x;
     ssc->prev_step_.y = tc->pos_.y;
     tc->pos_.x -= mc->speed_;
   }
-  if (controls_.IsPressed(pcc->right_button_)) {
+  if (controls_.IsPressed(pcc->right_button_ | TK_KEY_RELEASED)) {
     ssc->prev_step_.x = tc->pos_.x;
     ssc->prev_step_.y = tc->pos_.y;
     tc->pos_.x += mc->speed_;
