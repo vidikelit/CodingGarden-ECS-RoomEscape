@@ -2,8 +2,8 @@
 #define ECS_GAME_SCENE_H
 
 #include <lib/scenes/i_scene.h>
-#include "lib/ecs/engine.h"
 #include "game/control.h"
+#include "lib/ecs/engine.h"
 
 class GameScene : public IScene {
  private:
@@ -17,7 +17,6 @@ class GameScene : public IScene {
   void OnCreate() override;
   void OnRender() override;
   void OnExit() override;
-  void OnPreLoad();
 
   GameScene(Context* const ctx, const Controls& controls);
 };

@@ -1,8 +1,8 @@
 #include <BearLibTerminal.h>
-#include <game/scenes/game_scene.h>
-#include <lib/scenes/scene_manager.h>
 #include "game/control.h"
+#include "game/scenes/game_scene.h"
 #include "game/window.h"
+#include "lib/scenes/scene_manager.h"
 
 int main() {
   terminal_open();

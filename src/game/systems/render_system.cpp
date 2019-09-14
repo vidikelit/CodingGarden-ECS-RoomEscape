@@ -15,16 +15,13 @@ void RenderSystem::OnUpdate() {
       auto texture = e.Get<TextureComponent>();
       auto transform = e.Get<TransformComponent>();
 
-      terminal_put(ToPos(transform->pos_.x), ToPos(transform->pos_.y), texture->symbol_);
-    }
-  }
-  for (auto &door : GetEntityManager()) {
-    if (door.Contains<DoorComponent>() && door.Contains<TextureComponent>()) {
-      auto texture = door.Get<TextureComponent>();
-      auto dc = door.Get<DoorComponent>();
-
-      if (current_room_ == ToPos(dc->id_room_)) {
-        terminal_put(ToPos(dc->pos_.x), ToPos(dc->pos_.y), texture->symbol_);
+      if (e.Contains<DoorComponent>()) {
+        auto door = e.Get<DoorComponent>();
+        if (current_room_ == ToPos(door->id_room_)) {
+          terminal_put(ToPos(transform->pos_.x), ToPos(transform->pos_.y), texture->symbol_);
+        }
+      } else {
+        terminal_put(ToPos(transform->pos_.x), ToPos(transform->pos_.y), texture->symbol_);
       }
     }
   }

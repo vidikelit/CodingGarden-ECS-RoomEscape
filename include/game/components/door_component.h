@@ -8,7 +8,6 @@
 class DoorComponent : public IComponent {
  public:
   int id_room_;
-  Vec2 pos_;
-  DoorComponent(int idRoom, const Vec2& pos) : id_room_(idRoom), pos_(pos) {}
+  explicit DoorComponent(int idRoom) : id_room_(idRoom) {}
 };
 #endif  // ECS_DOOR_COMPONENT_H

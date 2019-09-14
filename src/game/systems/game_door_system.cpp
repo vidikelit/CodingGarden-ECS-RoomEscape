@@ -26,7 +26,8 @@ void GameDoorSystem::GenerateDoor() {
             // вверх
             if (ToPos(rc1->pos_.y) > ToPos(rc2->pos_.y)) {
               auto door = engine.GetEntityManager()->CreateEntity();
-              door->Add<DoorComponent>(entity1.GetId(), Vec2(10, 6));
+              door->Add<DoorComponent>(entity1.GetId());
+              door->Add<TransformComponent>(Vec2(10, 6));
               door->Add<TextureComponent>('>');
               door->Add<ObstacleComponent>();
               door->Add<ColliderComponent>(OnesVec2, ZeroVec2);
@@ -34,7 +35,8 @@ void GameDoorSystem::GenerateDoor() {
             // вниз
             if (ToPos(rc1->pos_.y) < ToPos(rc2->pos_.y)) {
               auto door = engine.GetEntityManager()->CreateEntity();
-              door->Add<DoorComponent>(entity1.GetId(), Vec2(10, 16));
+              door->Add<DoorComponent>(entity1.GetId());
+              door->Add<TransformComponent>(Vec2(10, 16));
               door->Add<TextureComponent>('>');
               door->Add<ObstacleComponent>();
               door->Add<ColliderComponent>(OnesVec2, ZeroVec2);
@@ -45,7 +47,8 @@ void GameDoorSystem::GenerateDoor() {
             // влево
             if (ToPos(rc1->pos_.x) > ToPos(rc2->pos_.x)) {
               auto door = engine.GetEntityManager()->CreateEntity();
-              door->Add<DoorComponent>(entity1.GetId(), Vec2(0, 11));
+              door->Add<DoorComponent>(entity1.GetId());
+              door->Add<TransformComponent>(Vec2(0, 11));
               door->Add<TextureComponent>('>');
               door->Add<ObstacleComponent>();
               door->Add<ColliderComponent>(OnesVec2, ZeroVec2);
@@ -53,7 +56,8 @@ void GameDoorSystem::GenerateDoor() {
             // вправо
             if (ToPos(rc1->pos_.x) < ToPos(rc2->pos_.x)) {
               auto door = engine.GetEntityManager()->CreateEntity();
-              door->Add<DoorComponent>(entity1.GetId(), Vec2(20, 11));
+              door->Add<DoorComponent>(entity1.GetId());
+              door->Add<TransformComponent>(Vec2(20, 11));
               door->Add<TextureComponent>('>');
               door->Add<ObstacleComponent>();
               door->Add<ColliderComponent>(OnesVec2, ZeroVec2);
