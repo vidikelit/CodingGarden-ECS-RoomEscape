@@ -26,7 +26,6 @@ void CollisionSystem::OnUpdate() {
       entity.Get<ColliderComponent>()->Clear();
     }
   }
-
   for (auto& entity_1 : GetEntityManager()) {
     if (Filter(entity_1)) {
       for (auto& entity_2 : GetEntityManager()) {

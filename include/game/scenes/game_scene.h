@@ -7,6 +7,7 @@
 
 class GameScene : public IScene {
  private:
+  int current_room_ = 2;
   int width_wall_ = 21;
   int hight_wall_ = 9;
   const Engine engine{};
@@ -16,6 +17,7 @@ class GameScene : public IScene {
   void OnCreate() override;
   void OnRender() override;
   void OnExit() override;
+  void OnPreLoad();
 
   GameScene(Context* const ctx, const Controls& controls);
 };

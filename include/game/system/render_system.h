@@ -3,14 +3,15 @@
 
 #include "lib/ecs/system.h"
 
-class RenderSystem: public ISystem {
+class RenderSystem : public ISystem {
  protected:
   void OnPreUpdate() override;
   void OnUpdate() override;
   void OnPostUpdate() override;
 
  public:
-  RenderSystem(EntityManager *entityManager, SystemManager *systemManager);
+  int current_room_;
+  RenderSystem(EntityManager *entityManager, SystemManager *systemManager, int currentRoom);
 };
 
 #endif  // ECS_RENDER_SYSTEM_H

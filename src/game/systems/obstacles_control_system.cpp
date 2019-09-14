@@ -5,6 +5,7 @@
 #include "game/components/save_step_component.h"
 #include "game/components/transform_component.h"
 #include "lib/ecs/entity_manager.h"
+#include "game/math-utils.h"
 
 static bool Filter(const Entity& entity) {
   return entity.Contains<ColliderComponent>() && entity.Contains<TransformComponent>() &&
