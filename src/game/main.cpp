@@ -1,7 +1,10 @@
 #include <BearLibTerminal.h>
+#include "game/components/menu_component.h"
 #include "game/control.h"
-#include "game/scenes/game_scene.h"
 #include "game/window.h"
+#include "game/status.h"
+#include "game/scenes/game_scene.h"
+#include "game/scenes/menu_scene.h"
 #include "lib/scenes/scene_manager.h"
 
 int main() {
@@ -10,17 +13,21 @@ int main() {
   terminal_set("input: filter=[keyboard+];");
 
   Windows windows;
+  Engine engine;
   Controls controls;
+  Status status;
   Context ctx{};
   SceneManager sm(ctx);
 
   windows.StartupSettings();
 
-  sm.Put("game", new GameScene(&ctx, controls));
-  ctx.scene_ = "game";
+  sm.Put("menu", new MenuScene(&ctx, engine, controls, &status));
+  sm.Put("game", new GameScene(&ctx, engine, controls, &status));
+  ctx.scene_ = "menu";
+
   while (true) {
     controls.OnUpdate();
-    if (controls.IsPressed(TK_ESCAPE)) break;
+    if (status.isEndGame()) break;
     sm.OnRender();
     controls.Reset();
   }

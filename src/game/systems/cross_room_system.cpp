@@ -105,8 +105,7 @@ void CrossRoomSystem::CheckCurrentRoom() {
 void CrossRoomSystem::OnUpdate() {
   for (auto &entity : GetEntityManager()) {
     if (entity.Contains<PlayerControlComponent>()) {
-      auto pcc = entity.Get<PlayerControlComponent>();
-      if (controls.IsPressed(pcc->e_button_ | TK_KEY_RELEASED)) {
+      if (controls.IsPressed(TK_E)) {
         Scanner();
       }
     }
