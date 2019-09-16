@@ -5,6 +5,7 @@
 #include "game/system/cross_room_system.h"
 #include "game/system/game_door_system.h"
 #include "game/system/game_room_system.h"
+#include "game/system/game_coin_system.h"
 #include "game/system/movement_control_system.h"
 #include "game/system/obstacles_control_system.h"
 #include "game/system/render_system.h"
@@ -23,6 +24,18 @@ void GameScene::OnCreate() {
   {
     auto room = engine.GetEntityManager()->CreateEntity();
     room->Add<RoomComponent>(Vec2(0, 0), true);
+  }
+  {
+    auto sys = engine.GetSystemManager();
+    sys->AddSystem<GameRoomSystem>(engine);
+    engine.OnUpdate();
+    sys->AddSystem<GameDoorSystem>(engine);
+    sys->AddSystem<GameCoinSystem>(engine);
+    sys->AddSystem<RenderSystem>();
+    sys->AddSystem<CrossRoomSystem>(controls);
+    sys->AddSystem<MovementControlSystem>(controls);
+    sys->AddSystem<ObstaclesControlSystem>(engine);
+    sys->AddSystem<CollisionSystem>();
   }
   {
     // игрок
@@ -66,18 +79,6 @@ void GameScene::OnCreate() {
       wall_right->Add<ObstacleComponent>();
       wall_right->Add<ColliderComponent>(OnesVec2, ZeroVec2);
     }
-  }
-  {
-    auto sys = engine.GetSystemManager();
-    sys->AddSystem<GameRoomSystem>(engine);
-    engine.OnUpdate();
-    sys->AddSystem<GameDoorSystem>(engine);
-
-    sys->AddSystem<RenderSystem>();
-    sys->AddSystem<CrossRoomSystem>(controls);
-    sys->AddSystem<MovementControlSystem>(controls);
-    sys->AddSystem<ObstaclesControlSystem>();
-    sys->AddSystem<CollisionSystem>();
   }
 }
 void GameScene::OnRender() {

@@ -1,11 +1,11 @@
 #include "game/system/obstacles_control_system.h"
 
+#include "game/components/coin_component.h"
 #include "game/components/collider_component.h"
 #include "game/components/obstacle_component.h"
 #include "game/components/save_step_component.h"
 #include "game/components/transform_component.h"
 #include "lib/ecs/entity_manager.h"
-#include "game/math-utils.h"
 
 static bool Filter(const Entity& entity) {
   return entity.Contains<ColliderComponent>() && entity.Contains<TransformComponent>() &&
@@ -30,10 +30,14 @@ static void Rollback(const Entity& entity) {
 }
 void ObstaclesControlSystem::OnUpdate() {
   for (auto& entity : GetEntityManager()) {
+    if (entity.Contains<CoinComponent>() && IsRollback(entity)) {
+      engine.GetEntityManager()->DeleteEntity(entity.GetId());
+    }
     if (Filter(entity) && IsRollback(entity)) {
       Rollback(entity);
     }
   }
 }
-ObstaclesControlSystem::ObstaclesControlSystem(EntityManager* entityManager, SystemManager* systemManager)
-    : ISystem(entityManager, systemManager) {}
+ObstaclesControlSystem::ObstaclesControlSystem(EntityManager* entityManager, SystemManager* systemManager,
+                                               const Engine& engine)
+    : ISystem(entityManager, systemManager), engine(engine) {}

@@ -1,7 +1,6 @@
 #ifndef ECS_DOOR_COMPONENT_H
 #define ECS_DOOR_COMPONENT_H
 
-#include "game/components/door_component.h"
 #include "lib/ecs/component.h"
 #include "lib/math/vec2.h"
 
