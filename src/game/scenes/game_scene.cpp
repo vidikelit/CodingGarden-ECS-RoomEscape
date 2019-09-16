@@ -7,6 +7,7 @@
 #include "game/system/movement_control_system.h"
 #include "game/system/obstacles_control_system.h"
 #include "game/system/render_system.h"
+#include "game/system/cross_room_system.h"
 
 #include "game/components/collider_component.h"
 #include "game/components/movement_component.h"
@@ -16,11 +17,12 @@
 #include "game/components/save_step_component.h"
 #include "game/components/texture_component.h"
 #include "game/components/transform_component.h"
+#include "game/components/room_size_component.h"
 
 void GameScene::OnCreate() {
   {
     auto room = engine.GetEntityManager()->CreateEntity();
-    room->Add<RoomComponent>(Vec2(0, 0));
+    room->Add<RoomComponent>(Vec2(0, 0), true);
   }
   {
     auto player = engine.GetEntityManager()->CreateEntity();
@@ -29,8 +31,9 @@ void GameScene::OnCreate() {
     player->Add<TextureComponent>('@');
     player->Add<ObstacleComponent>();
     player->Add<MovementComponent>(1);
-    player->Add<PlayerControlComponent>(TK_UP, TK_DOWN, TK_LEFT, TK_RIGHT);
+    player->Add<PlayerControlComponent>(TK_UP, TK_DOWN, TK_LEFT, TK_RIGHT, TK_E);
     player->Add<ColliderComponent>(OnesVec2, ZeroVec2);
+    player->Add<RoomSizeComponent>();
   }
   // стенка
   //  for (int i = 0; i < width_wall_; i++) {
@@ -66,7 +69,9 @@ void GameScene::OnCreate() {
     sys->AddSystem<GameRoomSystem>(engine);
     engine.OnUpdate();
     sys->AddSystem<GameDoorSystem>(engine);
-    sys->AddSystem<RenderSystem>(current_room_);
+
+    sys->AddSystem<RenderSystem>();
+    sys->AddSystem<CrossRoomSystem>(controls);
     sys->AddSystem<MovementControlSystem>(controls);
     sys->AddSystem<ObstaclesControlSystem>();
     sys->AddSystem<CollisionSystem>();

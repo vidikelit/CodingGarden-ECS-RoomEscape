@@ -7,7 +7,9 @@
 class RoomComponent : public IComponent {
  public:
   Vec2 pos_;
-  explicit RoomComponent(const Vec2& pos) : pos_(pos) {}
+  bool current = false;
+
+  RoomComponent(const Vec2& pos, bool current) : pos_(pos), current(current) {}
 };
 
 #endif  // ECS_ROOM_COMPONENT_H

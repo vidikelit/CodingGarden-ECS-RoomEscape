@@ -11,7 +11,6 @@ static bool Filter(const Entity &entity) {
   return entity.Contains<RoomComponent>();
 }
 void GameRoomSystem::GenerateRoom() {
-  // комнаты генерятся с 1, потому что 0 комната создается в сцене
   for (int i = 0; i < std::experimental::randint(ToPos(rage_rooms_.x), ToPos(rage_rooms_.y)); i++) {
     float x = map_.x;
     float y = map_.y;
@@ -32,7 +31,7 @@ void GameRoomSystem::GenerateRoom() {
       }
     }
     auto room = engine.GetEntityManager()->CreateEntity();
-    room->Add<RoomComponent>(Vec2(map_.x, map_.y));
+    room->Add<RoomComponent>(Vec2(map_.x, map_.y), false);
   }
 }
 void GameRoomSystem::GenerateCoordinates() {

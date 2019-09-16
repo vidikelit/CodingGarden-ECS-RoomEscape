@@ -7,7 +7,6 @@
 
 class GameScene : public IScene {
  private:
-  int current_room_ = 2;
   int width_wall_ = 21;
   int hight_wall_ = 9;
   const Engine engine{};
