@@ -25,9 +25,10 @@ void GameScene::OnCreate() {
     room->Add<RoomComponent>(Vec2(0, 0), true);
   }
   {
+    // игрок
     auto player = engine.GetEntityManager()->CreateEntity();
-    player->Add<TransformComponent>(Vec2(10, 10));
-    player->Add<SaveStepComponent>(Vec2(10, 10));
+    player->Add<TransformComponent>(Vec2(10, 11));
+    player->Add<SaveStepComponent>(Vec2(10, 11));
     player->Add<TextureComponent>('@');
     player->Add<ObstacleComponent>();
     player->Add<MovementComponent>(1);
@@ -35,35 +36,37 @@ void GameScene::OnCreate() {
     player->Add<ColliderComponent>(OnesVec2, ZeroVec2);
     player->Add<RoomSizeComponent>();
   }
+  {
   // стенка
-  //  for (int i = 0; i < width_wall_; i++) {
-  //    // верхняя
-  //    auto wall_top = engine.GetEntityManager()->CreateEntity();
-  //    wall_top->Add<TransformComponent>(Vec2(i, 6));
-  //    wall_top->Add<TextureComponent>('#');
-  //    wall_top->Add<ObstacleComponent>();
-  //    wall_top->Add<ColliderComponent>(OnesVec2, ZeroVec2);
-  //    // нижняя
-  //    auto wall_bottom = engine.GetEntityManager()->CreateEntity();
-  //    wall_bottom->Add<TransformComponent>(Vec2(i, 16));
-  //    wall_bottom->Add<TextureComponent>('#');
-  //    wall_bottom->Add<ObstacleComponent>();
-  //    wall_bottom->Add<ColliderComponent>(OnesVec2, ZeroVec2);
-  //  }
-  //  for (int i = 0; i < hight_wall_; i++) {
-  //    // левая
-  //    auto wall_left = engine.GetEntityManager()->CreateEntity();
-  //    wall_left->Add<TransformComponent>(Vec2(0, 7 + i));
-  //    wall_left->Add<TextureComponent>('#');
-  //    wall_left->Add<ObstacleComponent>();
-  //    wall_left->Add<ColliderComponent>(OnesVec2, ZeroVec2);
-  //    // правая
-  //    auto wall_right = engine.GetEntityManager()->CreateEntity();
-  //    wall_right->Add<TransformComponent>(Vec2(width_wall_ - 1, 7 + i));
-  //    wall_right->Add<TextureComponent>('#');
-  //    wall_right->Add<ObstacleComponent>();
-  //    wall_right->Add<ColliderComponent>(OnesVec2, ZeroVec2);
-  //  }
+    for (int i = 0; i < width_wall_; i++) {
+      // верхняя
+      auto wall_top = engine.GetEntityManager()->CreateEntity();
+      wall_top->Add<TransformComponent>(Vec2(i, 6));
+      wall_top->Add<TextureComponent>('#');
+      wall_top->Add<ObstacleComponent>();
+      wall_top->Add<ColliderComponent>(OnesVec2, ZeroVec2);
+      // нижняя
+      auto wall_bottom = engine.GetEntityManager()->CreateEntity();
+      wall_bottom->Add<TransformComponent>(Vec2(i, 16));
+      wall_bottom->Add<TextureComponent>('#');
+      wall_bottom->Add<ObstacleComponent>();
+      wall_bottom->Add<ColliderComponent>(OnesVec2, ZeroVec2);
+    }
+    for (int i = 0; i < hight_wall_; i++) {
+      // левая
+      auto wall_left = engine.GetEntityManager()->CreateEntity();
+      wall_left->Add<TransformComponent>(Vec2(0, 7 + i));
+      wall_left->Add<TextureComponent>('#');
+      wall_left->Add<ObstacleComponent>();
+      wall_left->Add<ColliderComponent>(OnesVec2, ZeroVec2);
+      // правая
+      auto wall_right = engine.GetEntityManager()->CreateEntity();
+      wall_right->Add<TransformComponent>(Vec2(width_wall_ - 1, 7 + i));
+      wall_right->Add<TextureComponent>('#');
+      wall_right->Add<ObstacleComponent>();
+      wall_right->Add<ColliderComponent>(OnesVec2, ZeroVec2);
+    }
+  }
   {
     auto sys = engine.GetSystemManager();
     sys->AddSystem<GameRoomSystem>(engine);
