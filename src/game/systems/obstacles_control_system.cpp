@@ -32,7 +32,9 @@ void ObstaclesControlSystem::OnUpdate() {
   for (auto& entity : GetEntityManager()) {
     if (Filter(entity)) {
       for (const auto& item : entity.Get<ColliderComponent>()->GetCollisions()) {
-        engine.GetEntityManager()->DeleteEntity(item->GetId());
+        if (item->Contains<CoinComponent>()) {
+          engine.GetEntityManager()->DeleteEntity(item->GetId());
+        }
       }
     }
     if (Filter(entity) && IsRollback(entity)) {
