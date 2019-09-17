@@ -7,7 +7,9 @@
 
 class ObstaclesControlSystem : public ISystem {
  private:
+  int current_room_;
   const Engine& engine;
+  void CheckCurrentRoom();
 
  protected:
   void OnUpdate() override;
