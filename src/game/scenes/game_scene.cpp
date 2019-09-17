@@ -26,18 +26,6 @@ void GameScene::OnCreate() {
     room->Add<RoomComponent>(Vec2(0, 0), true);
   }
   {
-    auto sys = engine.GetSystemManager();
-    sys->AddSystem<GameRoomSystem>(engine);
-    engine.OnUpdate();
-    sys->AddSystem<GameDoorSystem>(engine);
-    sys->AddSystem<GameCoinSystem>(engine);
-    sys->AddSystem<RenderSystem>();
-    sys->AddSystem<CrossRoomSystem>(controls);
-    sys->AddSystem<MovementControlSystem>(controls);
-    sys->AddSystem<ObstaclesControlSystem>(engine);
-    sys->AddSystem<CollisionSystem>();
-  }
-  {
     // игрок
     auto player = engine.GetEntityManager()->CreateEntity();
     player->Add<TransformComponent>(Vec2(10, 11));
@@ -79,6 +67,18 @@ void GameScene::OnCreate() {
       wall_right->Add<ObstacleComponent>();
       wall_right->Add<ColliderComponent>(OnesVec2, ZeroVec2);
     }
+  }
+  {
+    auto sys = engine.GetSystemManager();
+    sys->AddSystem<GameRoomSystem>(engine);
+    engine.OnUpdate();
+    sys->AddSystem<GameDoorSystem>(engine);
+    sys->AddSystem<GameCoinSystem>(engine);
+    sys->AddSystem<RenderSystem>();
+    sys->AddSystem<CrossRoomSystem>(controls);
+    sys->AddSystem<MovementControlSystem>(controls);
+    sys->AddSystem<ObstaclesControlSystem>(engine);
+    sys->AddSystem<CollisionSystem>();
   }
 }
 void GameScene::OnRender() {

@@ -14,8 +14,8 @@ void GameCoinSystem::GenerateCoin() {
     if (room.Contains<RoomComponent>()) {
       for (int i = 0; i < std::experimental::randint(1, 4); i++) {
         auto door = engine.GetEntityManager()->CreateEntity();
-        door->Add<CoinComponent>(room.GetId());
         door->Add<TransformComponent>(Vec2(std::experimental::randint(3, 16), std::experimental::randint(9, 14)));
+        door->Add<CoinComponent>(room.GetId());
         door->Add<TextureComponent>('$');
         door->Add<ColliderComponent>(OnesVec2, ZeroVec2);
       }

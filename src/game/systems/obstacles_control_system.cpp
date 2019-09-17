@@ -30,8 +30,10 @@ static void Rollback(const Entity& entity) {
 }
 void ObstaclesControlSystem::OnUpdate() {
   for (auto& entity : GetEntityManager()) {
-    if (entity.Contains<CoinComponent>() && IsRollback(entity)) {
-      engine.GetEntityManager()->DeleteEntity(entity.GetId());
+    if (Filter(entity)) {
+      for (const auto& item : entity.Get<ColliderComponent>()->GetCollisions()) {
+        engine.GetEntityManager()->DeleteEntity(item->GetId());
+      }
     }
     if (Filter(entity) && IsRollback(entity)) {
       Rollback(entity);
