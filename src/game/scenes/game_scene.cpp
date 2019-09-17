@@ -3,20 +3,24 @@
 
 #include "game/system/collision_system.h"
 #include "game/system/cross_room_system.h"
+#include "game/system/game_coin_system.h"
 #include "game/system/game_door_system.h"
 #include "game/system/game_room_system.h"
-#include "game/system/game_coin_system.h"
 #include "game/system/movement_control_system.h"
 #include "game/system/obstacles_control_system.h"
 #include "game/system/render_system.h"
 
+#include "game/components/coins_component.h"
 #include "game/components/collider_component.h"
+#include "game/components/health_component.h"
 #include "game/components/movement_component.h"
 #include "game/components/obstacle_component.h"
+#include "game/components/player_component.h"
 #include "game/components/player_control_component.h"
 #include "game/components/room_component.h"
 #include "game/components/room_size_component.h"
 #include "game/components/save_step_component.h"
+#include "game/components/steps_component.h"
 #include "game/components/texture_component.h"
 #include "game/components/transform_component.h"
 
@@ -28,6 +32,7 @@ void GameScene::OnCreate() {
   {
     // игрок
     auto player = engine.GetEntityManager()->CreateEntity();
+    player->Add<PlayerComponent>();
     player->Add<TransformComponent>(Vec2(10, 11));
     player->Add<SaveStepComponent>(Vec2(10, 11));
     player->Add<TextureComponent>('@');
@@ -36,6 +41,9 @@ void GameScene::OnCreate() {
     player->Add<PlayerControlComponent>(TK_UP, TK_DOWN, TK_LEFT, TK_RIGHT);
     player->Add<ColliderComponent>(OnesVec2, ZeroVec2);
     player->Add<RoomSizeComponent>();
+    player->Add<HealthComponent>(100);
+    player->Add<CoinsComponent>(0);
+    player->Add<StepsComponent>(50);
   }
   {
     // стенка

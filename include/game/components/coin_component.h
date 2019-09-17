@@ -4,7 +4,7 @@
 #include "lib/ecs/component.h"
 #include "lib/math/vec2.h"
 
-class  CoinComponent : public IComponent {
+class CoinComponent : public IComponent {
  public:
   int id_room_;
   explicit CoinComponent(int idRoom) : id_room_(idRoom) {}
