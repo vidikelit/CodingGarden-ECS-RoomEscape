@@ -9,6 +9,7 @@
 #include "game/system/movement_control_system.h"
 #include "game/system/obstacles_control_system.h"
 #include "game/system/render_system.h"
+#include "game/system/zero_steps_system.h"
 
 #include "game/components/coins_component.h"
 #include "game/components/collider_component.h"
@@ -87,6 +88,7 @@ void GameScene::OnCreate() {
     sys->AddSystem<MovementControlSystem>(controls);
     sys->AddSystem<ObstaclesControlSystem>(engine);
     sys->AddSystem<CollisionSystem>();
+    sys->AddSystem<ZeroStepsSystem>(ctx_);
   }
 }
 void GameScene::OnRender() {

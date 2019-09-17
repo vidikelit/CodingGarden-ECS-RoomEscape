@@ -22,6 +22,7 @@ void RenderSystem::OnUpdate() {
       auto texture = entity.Get<TextureComponent>();
       auto transform = entity.Get<TransformComponent>();
 
+      terminal_layer(1);
       // отрисовка объектов
       if (entity.Contains<DoorComponent>()) {
         auto door = entity.Get<DoorComponent>();
@@ -36,7 +37,6 @@ void RenderSystem::OnUpdate() {
       } else {
         terminal_put(ToPos(transform->pos_.x), ToPos(transform->pos_.y), texture->symbol_);
       }
-
       // отрисовка индикаторов игрока
       if (entity.Contains<PlayerComponent>()) {
         auto health = entity.Get<HealthComponent>();
@@ -51,6 +51,14 @@ void RenderSystem::OnUpdate() {
 
         terminal_put(6, 3, 0xB7);
         terminal_printf(7, 3, "%d", steps->count_);
+      }
+      terminal_layer(0);
+      // отрисовка пола
+      for (int i = 1; i < 20; i++) {
+        terminal_put(i, 7, 0xB7);
+        for (int j = 0; j < 9; j++) {
+          terminal_put(i, 7 + j, 0xB7);
+        }
       }
     }
   }

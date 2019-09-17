@@ -1,5 +1,6 @@
-//
-// Created by vidik on 17.09.2019.
-//
+#include "game/scenes/death_scene.h"
 
-#include "death_scene.h"
+void DeathScene::OnCreate() {}
+void DeathScene::OnRender() {}
+void DeathScene::OnExit() {}
+DeathScene::DeathScene(Context* const ctx) : IScene(ctx) {}
