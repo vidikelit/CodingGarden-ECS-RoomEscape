@@ -8,6 +8,7 @@
 #include "game/components/texture_component.h"
 #include "game/components/transform_component.h"
 #include "game/components/health_component.h"
+#include "game/components/room_size_component.h"
 
 void GameEnemySystem::GenerateEnemy() {
   for (auto &room : GetEntityManager()) {
@@ -16,11 +17,12 @@ void GameEnemySystem::GenerateEnemy() {
         auto enemy = engine.GetEntityManager()->CreateEntity();
         enemy->Add<TransformComponent>(Vec2(std::experimental::randint(3, 16), std::experimental::randint(9, 14)));
         enemy->Add<EnimyComponent>(room.GetId());
-        enemy->Add<TextureComponent>('E');
+        enemy->Add<TextureComponent>('*');
         enemy->Add<ColliderComponent>(OnesVec2, ZeroVec2);
         enemy->Add<DamageComponent>(1, 3);
         enemy->Add<CombatComponent>(OnesVec2, ZeroVec2);
         enemy->Add<HealthComponent>(50);
+        enemy->Add<RoomSizeComponent>();
       }
     }
   }

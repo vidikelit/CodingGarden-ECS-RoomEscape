@@ -17,26 +17,23 @@ void GameMenuSystem::MainMenu() {
         terminal_printf(5, 8 + i, "%s", mc->pointMainMenu[i]);
         terminal_color(color_from_name("white"));
         if (controls.IsPressed(TK_ENTER)) {
-          // продолжить игру
-          if (strcmp(mc->pointMainMenu[mc->menuPoint_], mc->continue_game_) == 0) {
-            break;
-          }
           // новая игра
           if (strcmp(mc->pointMainMenu[mc->menuPoint_], mc->new_game_) == 0) {
             status->setNewGame(true);
             mc->menuPoint_ = 0;
             break;
           }
-          // загрузить игру
-          if (strcmp(mc->pointMainMenu[mc->menuPoint_], mc->load_game_) == 0) {
-            mc->menuPoint_ = 0;
-            mc->menu_ = 1;
-            break;
-          }
           // настройки
           if (strcmp(mc->pointMainMenu[mc->menuPoint_], mc->setting_game_) == 0) {
-            mc->menuPoint_ = 0;
-            mc->menu_ = 2;
+            if (status->isSettingGameOnOff()) {
+              mc->setting_game_ = "Тайлы [color=red]OFF";
+              mc->pointMainMenu.at(1) = "Тайлы [color=red]OFF";
+              status->setSettingGameOnOff(false);
+            } else {
+              mc->setting_game_ = "Тайлы [color=green]ON";
+              mc->pointMainMenu.at(1) = "Тайлы [color=green]ON";
+              status->setSettingGameOnOff(true);
+            }
             break;
           }
           // выход
@@ -64,4 +61,6 @@ void GameMenuSystem::OnUpdate() {
 }
 GameMenuSystem::GameMenuSystem(EntityManager *entityManager, SystemManager *systemManager, const Controls &controls,
                                Status *status)
-    : ISystem(entityManager, systemManager), controls(controls), status(status) {}
+    : ISystem(entityManager, systemManager), controls(controls), status(status) {
+  status->setSettingGameOnOff(false);
+}

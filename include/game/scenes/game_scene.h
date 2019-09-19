@@ -13,14 +13,14 @@ class GameScene : public IScene {
 
   const Engine& engine;
   const Controls& controls;
-  Status* status;
+  const Status& status;
 
  public:
   void OnCreate() override;
   void OnRender() override;
   void OnExit() override;
 
-  GameScene(Context* const ctx, const Engine& engine, const Controls& controls, Status* status);
+  GameScene(Context* const ctx, const Engine& engine, const Controls& controls, const Status& status);
 };
 
 #endif  // ECS_GAME_SCENE_H

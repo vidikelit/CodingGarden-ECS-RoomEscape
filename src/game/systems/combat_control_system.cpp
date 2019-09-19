@@ -26,13 +26,14 @@ void CombatControlSystem::Combat(const Entity& entity) {
   auto dc = entity.Get<DamageComponent>();
 
   for (const auto& enemy : cc->GetEnemies()) {
-    if (enemy->Get<EnimyComponent>()->id_room_ == current_room_ && enemy->Get<HealthComponent>()->count_ > 0) {
+    if (enemy->Get<EnimyComponent>()->id_room_ == current_room_) {
       // урон игроку
       hc->count_ -= enemy->Get<DamageComponent>()->getDamage();
       // урон персонажа
       enemy->Get<HealthComponent>()->count_ -= dc->getDamage();
-    } else {
-      engine.GetEntityManager()->DeleteEntity(enemy->GetId());
+      if (enemy->Get<HealthComponent>()->count_ <= 0) {
+        engine.GetEntityManager()->DeleteEntity(enemy->GetId());
+      }
     }
   }
 }

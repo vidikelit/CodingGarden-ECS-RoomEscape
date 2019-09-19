@@ -9,7 +9,7 @@ class GameRoomSystem : public ISystem {
  private:
   Vec2 map_ = Vec2(0, 0);          // временные координаты
   Vec2 size_ = Vec2(21, 17);       // размер комнат
-  Vec2 rage_rooms_ = Vec2(1, 5);  // диапазон количества комнат
+  Vec2 rage_rooms_ = Vec2(5, 10);  // диапазон количества комнат
 
   const Engine& engine;
 

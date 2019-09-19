@@ -7,6 +7,7 @@
 #include "game/components/room_component.h"
 #include "game/components/texture_component.h"
 #include "game/components/transform_component.h"
+#include "game/components/room_size_component.h"
 #include "game/math-utils.h"
 #include "game/system/game_door_system.h"
 
@@ -31,6 +32,7 @@ void GameDoorSystem::GenerateDoor() {
               door->Add<TextureComponent>('>');
               door->Add<ObstacleComponent>();
               door->Add<ColliderComponent>(OnesVec2, ZeroVec2);
+              door->Add<RoomSizeComponent>();
             }
             // вниз
             if (ToPos(rc1->pos_.y) < ToPos(rc2->pos_.y)) {
@@ -40,6 +42,7 @@ void GameDoorSystem::GenerateDoor() {
               door->Add<TextureComponent>('>');
               door->Add<ObstacleComponent>();
               door->Add<ColliderComponent>(OnesVec2, ZeroVec2);
+              door->Add<RoomSizeComponent>();
             }
           }
           if (abs(abs(ToPos(rc1->pos_.x)) - abs(ToPos(rc2->pos_.x))) == ToPos(size_.x) &&
@@ -52,6 +55,7 @@ void GameDoorSystem::GenerateDoor() {
               door->Add<TextureComponent>('>');
               door->Add<ObstacleComponent>();
               door->Add<ColliderComponent>(OnesVec2, ZeroVec2);
+              door->Add<RoomSizeComponent>();
             }
             // вправо
             if (ToPos(rc1->pos_.x) < ToPos(rc2->pos_.x)) {
@@ -61,6 +65,7 @@ void GameDoorSystem::GenerateDoor() {
               door->Add<TextureComponent>('>');
               door->Add<ObstacleComponent>();
               door->Add<ColliderComponent>(OnesVec2, ZeroVec2);
+              door->Add<RoomSizeComponent>();
             }
           }
         }

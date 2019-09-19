@@ -27,9 +27,11 @@ static bool IsRollback(const Entity& entity) {
 static void Rollback(const Entity& entity) {
   auto tc = entity.Get<TransformComponent>();
   auto ssc = entity.Get<SaveStepComponent>();
+  auto player_steps = entity.Get<StepsComponent>();
 
   tc->pos_.x = ssc->prev_step_.x;
   tc->pos_.y = ssc->prev_step_.y;
+  player_steps->count_++;
 }
 void ObstaclesControlSystem::OnUpdate() {
   CheckCurrentRoom();
