@@ -13,7 +13,6 @@ static bool Filter(const Entity &entity) {
   return entity.Contains<MovementComponent>() && entity.Contains<TransformComponent>() &&
          entity.Contains<PlayerControlComponent>();
 }
-
 void MovementControlSystem::OnUpdateEntity(Entity *entity) const {
   auto mc = entity->Get<MovementComponent>();
   auto tc = entity->Get<TransformComponent>();
@@ -46,7 +45,6 @@ void MovementControlSystem::OnUpdateEntity(Entity *entity) const {
     player_steps->count_--;
   }
 }
-
 void MovementControlSystem::OnUpdate() {
   for (auto &entity : GetEntityManager()) {
     if (Filter(entity)) {

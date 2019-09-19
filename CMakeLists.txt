@@ -15,7 +15,7 @@ set(PROJECT_SOURCES_DIR ${PROJECT_SOURCE_DIR}/src)
 file(GLOB_RECURSE HEADERS ${PROJECT_HEADERS_DIR}/*.h)
 file(GLOB_RECURSE SOURCES ${PROJECT_SOURCES_DIR}/*.cpp)
 
-add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES} src/game/systems/save_system.cpp include/game/system/save_system.h include/game/components/enimy_component.h src/game/systems/game_enemy_system.cpp include/game/system/game_enemy_system.h include/game/components/damage_component.h include/game/components/combat_component.h src/game/systems/combat_control_system.cpp include/game/system/combat_control_system.h include/game/system/enemy_death_system.h src/game/systems/enemy_collision_system.cpp include/game/system/enemy_collision_system.h src/game/systems/death_system.cpp include/game/system/death_system.h)
+add_executable(${PROJECT_NAME} ${HEADERS} ${SOURCES} src/game/systems/save_system.cpp include/game/system/save_system.h include/game/components/enimy_component.h src/game/systems/game_enemy_system.cpp include/game/system/game_enemy_system.h include/game/components/damage_component.h include/game/components/combat_component.h src/game/systems/combat_control_system.cpp include/game/system/combat_control_system.h include/game/system/enemy_death_system.h src/game/systems/enemy_collision_system.cpp include/game/system/enemy_collision_system.h src/game/systems/death_system.cpp include/game/system/death_system.h src/game/systems/enemy_movement_system.cpp include/game/system/enemy_movement_system.h)
 include_directories(${PROJECT_HEADERS_DIR})
 
 target_link_libraries(${PROJECT_NAME} ${BLT_LIBRARIES})

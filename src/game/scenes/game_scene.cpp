@@ -14,6 +14,7 @@
 #include "game/system/obstacles_control_system.h"
 #include "game/system/render_symbols_system.h"
 #include "game/system/zero_steps_system.h"
+#include "game/system/enemy_movement_system.h"
 
 #include "game/components/coins_component.h"
 #include "game/components/collider_component.h"
@@ -101,6 +102,7 @@ void GameScene::OnCreate() {
     sys->AddSystem<CombatControlSystem>(engine);
     sys->AddSystem<ZeroStepsSystem>(ctx_);
     sys->AddSystem<DeathSystem>(ctx_);
+    sys->AddSystem<EnemyMovementSystem>(controls);
   }
 }
 void GameScene::OnRender() {

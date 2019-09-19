@@ -9,6 +9,7 @@
 #include "game/components/transform_component.h"
 #include "game/components/health_component.h"
 #include "game/components/room_size_component.h"
+#include "game/components/movement_component.h"
 
 void GameEnemySystem::GenerateEnemy() {
   for (auto &room : GetEntityManager()) {
@@ -23,6 +24,7 @@ void GameEnemySystem::GenerateEnemy() {
         enemy->Add<CombatComponent>(OnesVec2, ZeroVec2);
         enemy->Add<HealthComponent>(50);
         enemy->Add<RoomSizeComponent>();
+        enemy->Add<MovementComponent>(1);
       }
     }
   }
