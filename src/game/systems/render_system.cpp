@@ -3,6 +3,7 @@
 #include "game/components/coin_component.h"
 #include "game/components/coins_component.h"
 #include "game/components/door_component.h"
+#include "game/components/enimy_component.h"
 #include "game/components/health_component.h"
 #include "game/components/player_component.h"
 #include "game/components/room_component.h"
@@ -32,6 +33,11 @@ void RenderSystem::OnUpdate() {
       } else if (entity.Contains<CoinComponent>()) {
         auto coin = entity.Get<CoinComponent>();
         if (coin->id_room_ == current_room_) {
+          terminal_put(ToPos(transform->pos_.x), ToPos(transform->pos_.y), texture->symbol_);
+        }
+      } else if (entity.Contains<EnimyComponent>()) {
+        auto enemy = entity.Get<EnimyComponent>();
+        if (enemy->id_room_ == current_room_) {
           terminal_put(ToPos(transform->pos_.x), ToPos(transform->pos_.y), texture->symbol_);
         }
       } else {

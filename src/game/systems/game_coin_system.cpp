@@ -1,11 +1,11 @@
 #include <experimental/random>
 
-#include "game/system/game_coin_system.h"
-#include "game/components/room_component.h"
 #include "game/components/coin_component.h"
 #include "game/components/collider_component.h"
+#include "game/components/room_component.h"
 #include "game/components/texture_component.h"
 #include "game/components/transform_component.h"
+#include "game/system/game_coin_system.h"
 
 #include "lib/ecs/entity_manager.h"
 

@@ -1,10 +1,14 @@
-//
-// Created by vidik on 19.09.2019.
-//
-
 #ifndef ECS_ENEMY_COLLISION_SYSTEM_H
 #define ECS_ENEMY_COLLISION_SYSTEM_H
 
-class enemy_collision_system {};
+#include "lib/ecs/system.h"
+
+class EnemyCollisionSystem : public ISystem {
+ protected:
+  void OnUpdate() override;
+
+ public:
+  EnemyCollisionSystem(EntityManager *entityManager, SystemManager *systemManager);
+};
 
 #endif  // ECS_ENEMY_COLLISION_SYSTEM_H

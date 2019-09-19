@@ -7,6 +7,7 @@ class RenderSystem : public ISystem {
  private:
   int current_room_;
   void CheckCurrentRoom();
+
  protected:
   void OnPreUpdate() override;
   void OnUpdate() override;

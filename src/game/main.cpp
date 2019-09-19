@@ -5,6 +5,7 @@
 #include "game/status.h"
 #include "game/scenes/game_scene.h"
 #include "game/scenes/menu_scene.h"
+#include "game/scenes/death_scene.h"
 #include "game/scenes/zero_steps_scene.h"
 #include "lib/scenes/scene_manager.h"
 
@@ -25,6 +26,7 @@ int main() {
   sm.Put("menu", new MenuScene(&ctx, engine, controls, &status));
   sm.Put("game", new GameScene(&ctx, engine, controls, &status));
   sm.Put("zero_steps", new ZeroStepsScene(&ctx, engine, controls));
+  sm.Put("death", new DeathScene(&ctx, controls));
   ctx.scene_ = "menu";
 
   while (true) {

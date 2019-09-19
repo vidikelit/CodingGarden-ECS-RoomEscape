@@ -2,17 +2,23 @@
 #include <game/scenes/game_scene.h>
 
 #include "game/system/collision_system.h"
+#include "game/system/combat_control_system.h"
 #include "game/system/cross_room_system.h"
+#include "game/system/enemy_collision_system.h"
 #include "game/system/game_coin_system.h"
 #include "game/system/game_door_system.h"
+#include "game/system/game_enemy_system.h"
 #include "game/system/game_room_system.h"
 #include "game/system/movement_control_system.h"
 #include "game/system/obstacles_control_system.h"
 #include "game/system/render_system.h"
 #include "game/system/zero_steps_system.h"
+#include "game/system/death_system.h"
 
 #include "game/components/coins_component.h"
 #include "game/components/collider_component.h"
+#include "game/components/combat_component.h"
+#include "game/components/damage_component.h"
 #include "game/components/health_component.h"
 #include "game/components/movement_component.h"
 #include "game/components/obstacle_component.h"
@@ -42,9 +48,11 @@ void GameScene::OnCreate() {
     player->Add<PlayerControlComponent>(TK_UP, TK_DOWN, TK_LEFT, TK_RIGHT);
     player->Add<ColliderComponent>(OnesVec2, ZeroVec2);
     player->Add<RoomSizeComponent>();
-    player->Add<HealthComponent>(100);
+    player->Add<HealthComponent>(50);
     player->Add<CoinsComponent>(0);
     player->Add<StepsComponent>(50);
+    player->Add<DamageComponent>(5, 10);
+    player->Add<CombatComponent>(OnesVec2, ZeroVec2);
   }
   {
     // стенка
@@ -83,12 +91,16 @@ void GameScene::OnCreate() {
     engine.OnUpdate();
     sys->AddSystem<GameDoorSystem>(engine);
     sys->AddSystem<GameCoinSystem>(engine);
+    sys->AddSystem<GameEnemySystem>(engine);
     sys->AddSystem<RenderSystem>();
     sys->AddSystem<CrossRoomSystem>(controls);
     sys->AddSystem<MovementControlSystem>(controls);
     sys->AddSystem<ObstaclesControlSystem>(engine);
     sys->AddSystem<CollisionSystem>();
+    sys->AddSystem<EnemyCollisionSystem>();
+    sys->AddSystem<CombatControlSystem>(engine);
     sys->AddSystem<ZeroStepsSystem>(ctx_);
+    sys->AddSystem<DeathSystem>(ctx_);
   }
 }
 void GameScene::OnRender() {
