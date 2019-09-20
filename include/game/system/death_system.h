@@ -5,7 +5,7 @@
 #include "lib/scenes/context.h"
 
 class DeathSystem : public ISystem {
- protected:
+ private:
   Context* ctx_;
 
  protected:

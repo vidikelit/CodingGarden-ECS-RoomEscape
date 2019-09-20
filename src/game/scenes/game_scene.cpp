@@ -15,6 +15,7 @@
 #include "game/system/render_symbols_system.h"
 #include "game/system/zero_steps_system.h"
 #include "game/system/enemy_movement_system.h"
+#include "game/system/endgame_system.h"
 
 #include "game/components/coins_component.h"
 #include "game/components/collider_component.h"
@@ -51,7 +52,7 @@ void GameScene::OnCreate() {
     player->Add<RoomSizeComponent>();
     player->Add<HealthComponent>(100);
     player->Add<CoinsComponent>(0);
-    player->Add<StepsComponent>(50);
+    player->Add<StepsComponent>(100);
     player->Add<DamageComponent>(5, 10);
     player->Add<CombatComponent>(OnesVec2, ZeroVec2);
   }
@@ -92,6 +93,7 @@ void GameScene::OnCreate() {
     engine.OnUpdate();
     sys->AddSystem<GameDoorSystem>(engine);
     sys->AddSystem<GameCoinSystem>(engine);
+    engine.OnUpdate();
     sys->AddSystem<GameEnemySystem>(engine);
     sys->AddSystem<RenderSymbolsSystem>(status);
     sys->AddSystem<CrossRoomSystem>(controls);
@@ -103,6 +105,7 @@ void GameScene::OnCreate() {
     sys->AddSystem<ZeroStepsSystem>(ctx_);
     sys->AddSystem<DeathSystem>(ctx_);
     sys->AddSystem<EnemyMovementSystem>(controls);
+    sys->AddSystem<EndGameSystem>(ctx_);
   }
 }
 void GameScene::OnRender() {

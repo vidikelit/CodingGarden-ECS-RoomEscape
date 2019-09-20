@@ -16,7 +16,7 @@
 
 void RenderSymbolsSystem::OnPreUpdate() {
   terminal_clear();
-  if (status.isSettingGameOnOff() == true) {
+  if (status.isSettingGameOnOff()) {
     terminal_set("0x40: ../resources/sprites/player.png");
     terminal_set("0x24: ../resources/sprites/coinGold.png");
     terminal_set("0x2A: ../resources/sprites/enemy.png");
@@ -68,6 +68,14 @@ void RenderSymbolsSystem::OnPreUpdate() {
     terminal_set("0x3F: none");
     terminal_set("0xB7: none");
     terminal_set("0x23: none");
+    terminal_layer(0);
+    // отрисовка пола
+    for (int i = 1; i < 20; i++) {
+      terminal_put(i, 7, 0xB7);
+      for (int j = 0; j < 9; j++) {
+        terminal_put(i, 7 + j, 0xB7);
+      }
+    }
   }
 }
 void RenderSymbolsSystem::OnUpdate() {

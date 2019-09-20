@@ -43,7 +43,7 @@ void ObstaclesControlSystem::OnUpdate() {
         if (coin->Contains<CoinComponent>() && coin->Get<CoinComponent>()->id_room_ == current_room_) {
           engine.GetEntityManager()->DeleteEntity(coin->GetId());
           player_coins->count_++;
-          player_steps->count_ += 2;
+          player_steps->count_ += 10;
         }
       }
     }
